@@ -803,6 +803,7 @@ struct file {
 	struct list_head	f_tfile_llink;
 #endif /* #ifdef CONFIG_EPOLL */
 	struct address_space	*f_mapping;
+	struct path             f_covering_path;
 #ifdef CONFIG_DEBUG_WRITECOUNT
 	unsigned long f_mnt_write_state;
 #endif
@@ -2332,6 +2333,9 @@ extern struct file * open_exec(const char *);
 extern int is_subdir(struct dentry *, struct dentry *);
 extern int path_is_under(struct path *, struct path *);
 extern ino_t find_inode_number(struct dentry *, struct qstr *);
+
+extern char *file_path(struct file *, char *, int);
+extern void f_covering_path(struct file *, struct path *);
 
 #include <linux/err.h>
 
